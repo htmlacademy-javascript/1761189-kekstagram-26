@@ -4,14 +4,17 @@ const getRandomNumber = (min, max) => {
   }
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
 const getRandomItem = (array) => {
     let randomIndex =getRandomNumber(0, array.length);
     return array[randomIndex];
 }
 
+
 const maxSymbols = (str, maxLength) => {
   return str.length <= maxLength;
 }
+
 
 const COMMENTS_STR = ['Всё отлично!', 'В целом всё неплохо. Но не всё.',
 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -56,3 +59,5 @@ for (let i = 0; i <= 25; i++){
 
 
   console.log(photos);
+=======
+
