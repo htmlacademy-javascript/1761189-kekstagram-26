@@ -5,15 +5,13 @@ const getRandomNumber = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-export {getRandomNumber};
-
 const getRandomItem = (array) => {
     let randomIndex =getRandomNumber(0, array.length);
     return array[randomIndex];
 }
 
-export {getRandomItem};
-
 const maxSymbols = (str, maxLength) => {
   return str.length <= maxLength;
 }
+
+export {getRandomNumber, getRandomItem};
