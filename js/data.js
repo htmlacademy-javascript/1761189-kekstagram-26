@@ -31,7 +31,7 @@ const fillCommentsPicture = () => {
   }
 let photos = [];
 
-for (let i = 0; i <= 25; i++){
+for (let i = 0; i < 25; i++){
   let picture = {
       id: i,
       url: 'photos/' + (1 + i) + '.jpg',
@@ -42,4 +42,4 @@ for (let i = 0; i <= 25; i++){
   photos.push(picture);
 }
 
-export {fillCommentsPicture};
+export {fillCommentsPicture, photos};
