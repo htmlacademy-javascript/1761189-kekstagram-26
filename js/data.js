@@ -24,6 +24,7 @@ const fillCommentsPicture = () => {
       avatar: 'avatar-' + getRandomNumber(1, 6) + '.svg',
       message: getRandomItem(MESSAGE_STR),
       name: getRandomItem(NAME_STR),
+      comment: getRandomItem(COMMENTS_STR),
      }
      photoComments.push(comment);
     }
