@@ -14,4 +14,9 @@ const maxSymbols = (str, maxLength) => {
   return str.length <= maxLength;
 }
 
+function escEvent(evt) {
+  return evt.key === 'Esсape';
+}
+
 export {getRandomNumber, getRandomItem};
+export {evt};
