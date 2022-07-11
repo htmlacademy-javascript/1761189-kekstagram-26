@@ -43,4 +43,5 @@ for (let i = 0; i < 25; i++){
   photos.push(picture);
 }
 
-export {fillCommentsPicture, photos};
+console.log(photos);
+export {photos};
