@@ -1,18 +1,14 @@
-import {photos} from './data.js';
 import {escEvent} from './util.js';
-import {COMMENTS_STR} from './data.js';
 
-
-const COMMENTS_STR = 5;
+const SHOW_COMMENTS = 5;
 
 const bigPicture = document.querySelector('.big-picture');
-const closeButtonModal = document.querySelector('#upload-cancel');
 const body = document.querySelector('body');
 
 const closeBigPicturePhoto = document.querySelector('.big-picture__cancel');
 const bigPicturePhoto = bigPicture.querySelector('.big-picture__img img');
 const bigPictureLike = bigPicture.querySelector('.likes-count');
-const realComment = [];
+let realComments = [];
 
 const bigPictureComments = bigPicture.querySelector('.comments-count');
 const bigPictureCommentsList = bigPicture.querySelector('.social__comments');
@@ -25,19 +21,19 @@ const showCommentsAll = commentsInfo => {
   const commentFragment = document.createDocumentFragment();
   commentsInfo.forEach(({ avatar, name, message }) => {
     const comment = bigPictureCommentItem.cloneNode(true);
-    comment.querySelector('.social__picture').src = avatar;
+    comment.querySelector('.social__picture').src = 'img/' + avatar;
     comment.querySelector('.social__picture').alt = name;
-    comment.querySelector('.social__picture').textContent = message;
+    comment.querySelector('.social__text').textContent = message;
     commentFragment.append(comment);
   });
   return commentFragment;
 }
 
 const showOneComments = (comments) => {
-  const visibleComments = comments.slice(0, COMMENTS_STR);
+  const visibleComments = comments.slice(0, SHOW_COMMENTS);
   const firstComments = showCommentsAll(visibleComments);
 
-  pictureCommentCount.firstChild.textContent = `${visibleComments.length}`;
+  pictureCommentCount.textContent = `${visibleComments.length} из ${comments.length} комментариев`;
   bigPictureCommentsList.appendChild(firstComments);
 
   if (visibleComments.length === comments.length) {
@@ -46,28 +42,27 @@ const showOneComments = (comments) => {
 }
 
 const commentClickHandler = () => {
-  const addingComments = realComment.slice(bigPictureCommentsList.children.length, bigPictureCommentsList.children.length + COMMENTS_STR);
+  const addingComments = realComments.slice(bigPictureCommentsList.children.length, bigPictureCommentsList.children.length + SHOW_COMMENTS);
   const showMoreComments = showCommentsAll(addingComments);
   bigPictureCommentsList.appendChild(showMoreComments);
 
-  if (realComment.length === bigPictureCommentsList.children.length) {
+  if (realComments.length === bigPictureCommentsList.children.length) {
     pictureCommentLoader.classList.add('hidden');
   }
 
-  pictureCommentCount.firstChild.textContent = `${bigPictureCommentsList.children.length}`;
+  pictureCommentCount.firstChild.textContent = `${bigPictureCommentsList.children.length} из ${realComments.length} комментариев`;
 }
 
 const modalCloseClickHandler = () => {
   bigPicture.classList.add('hidden');
   pictureCommentLoader.classList.remove('hidden');
   body.classList.remove('modal-open');
-  closeButtonModal.removeEventListener('click', modalCloseClickHandler);
+  closeBigPicturePhoto.removeEventListener('click', modalCloseClickHandler);
   document.removeEventListener('keydown', closeEscHandler);
 }
 
 const closeEscHandler = (evt) => {
-  if (!escEvent(evt)) {
-    evt.preventDefault();
+  if (escEvent(evt)) {
     modalCloseClickHandler();
   }
 }
@@ -75,7 +70,7 @@ const closeEscHandler = (evt) => {
 const bigPictureModalOpen = ()=> {
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
-  closeButtonModal.addEventListener('click', modalCloseClickHandler);
+  closeBigPicturePhoto.addEventListener('click', modalCloseClickHandler);
   document.addEventListener('keydown', closeEscHandler);
 }
 
@@ -87,14 +82,15 @@ const openBigPicture = (url, likes, comments, description) => {
   pictureCommentsDescription.textContent = description;
 
   bigPictureCommentsList.innerHTML = '';
-  realComment = comments;
+  realComments = comments.slice();
 
   const bigPictureModalUp = () => {
     bigPicture.classList.remove('hidden');
     body.classList.add('modal-open');
 
-  closeBigPicturePhoto.addEventListener('click', modalCloseClickHandler);
-  pictureCommentLoader.addEventListener('click', commentClickHandler);
+    closeBigPicturePhoto.addEventListener('click', modalCloseClickHandler);
+    pictureCommentLoader.addEventListener('click', commentClickHandler);
+    showOneComments(comments);
   }
 
   bigPictureModalUp();
