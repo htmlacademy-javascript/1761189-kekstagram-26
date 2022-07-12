@@ -84,16 +84,8 @@ const openBigPicture = (url, likes, comments, description) => {
   bigPictureCommentsList.innerHTML = '';
   realComments = comments.slice();
 
-  const bigPictureModalUp = () => {
-    bigPicture.classList.remove('hidden');
-    body.classList.add('modal-open');
-
     closeBigPicturePhoto.addEventListener('click', modalCloseClickHandler);
     pictureCommentLoader.addEventListener('click', commentClickHandler);
-    showOneComments(comments);
-  }
-
-  bigPictureModalUp();
 
   showOneComments(comments);
 }
