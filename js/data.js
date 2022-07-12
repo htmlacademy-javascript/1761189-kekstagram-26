@@ -24,6 +24,7 @@ const fillCommentsPicture = () => {
       avatar: 'avatar-' + getRandomNumber(1, 6) + '.svg',
       message: getRandomItem(MESSAGE_STR),
       name: getRandomItem(NAME_STR),
+      comment: getRandomItem(COMMENTS_STR),
      }
      photoComments.push(comment);
     }
@@ -42,4 +43,5 @@ for (let i = 0; i < 25; i++){
   photos.push(picture);
 }
 
-export {fillCommentsPicture, photos};
+console.log(photos);
+export {photos};
