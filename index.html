@@ -16,9 +16,9 @@
     <section class="img-filters  img-filters--inactive  container">
       <h2 class="img-filters__title  visually-hidden">Фильтр фотографий</h2>
       <form class="img-filters__form" action="index.html" method="get" autocomplete="off">
-        <button type=button class="img-filters__button  img-filters__button--active" id="filter-default">По умолчанию</button>
-        <button type=button class="img-filters__button" id="filter-random">Случайные</button>
-        <button type=button class="img-filters__button" id="filter-discussed">Обсуждаемые</button>
+        <button type="button" class="img-filters__button  img-filters__button--active" id="filter-default">По умолчанию</button>
+        <button type="button" class="img-filters__button" id="filter-random">Случайные</button>
+        <button type="button" class="img-filters__button" id="filter-discussed">Обсуждаемые</button>
       </form>
     </section>
 
@@ -30,11 +30,11 @@
       <section class="img-upload">
         <div class="img-upload__wrapper">
           <h2 class="img-upload__title  visually-hidden">Загрузка фотографии</h2>
-          <form class="img-upload__form" id="upload-select-image" method="post" enctype="multipart/form-data" autocomplete="off">
+          <form class="img-upload__form" id="upload-select-image" method="post" enctype="multipart/form-data" action="https://26.javascript.pages.academy/kekstagram" autocomplete="off">
 
             <!-- Изначальное состояние поля для загрузки изображения -->
             <fieldset class="img-upload__start">
-              <input type="file" id="upload-file" class="img-upload__input  visually-hidden" name="filename" required>
+              <input type="file" id="upload-file" class="img-upload__input  visually-hidden" name="filename" required accept="image/png, image/jpeg">
               <label for="upload-file" class="img-upload__label  img-upload__control">Загрузить</label>
             </fieldset>
 
@@ -116,10 +116,10 @@
                 <!-- Добавление хэш-тегов и комментария к изображению -->
                 <fieldset class="img-upload__text text">
                   <div class="img-upload__field-wrapper">
-                    <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег">
+                    <input type="text" class="text__hashtags" name="hashtags" placeholder="#ХэшТег">
                   </div>
                   <div class="img-upload__field-wrapper">
-                    <textarea class="text__description" name="description" placeholder="Ваш комментарий..."></textarea>
+                    <textarea type="maxlength" class="text__description" name="description" placeholder="Ваш комментарий..." minlength="2" maxlength="140"></textarea>
                   </div>
                 </fieldset>
 
@@ -199,7 +199,7 @@
   <!-- Шаблон изображения случайного пользователя -->
   <template id="picture">
     <a href="#" class="picture">
-      <img class="picture__img" src="" width="182" height="182" alt="Случайная фотография">
+      <img class="picture__img" src="#" width="182" height="182" alt="Случайная фотография">
       <p class="picture__info">
         <span class="picture__comments"></span>
         <span class="picture__likes"></span>
@@ -232,8 +232,8 @@
     <div class="img-upload__message  img-upload__message--loading">Загружаем...</div>
   </template>
 
-
-  <script src="js/main.js" type="module"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
+  <script src="js/main.js" type="module" defer></script>
 
 
 </body>
