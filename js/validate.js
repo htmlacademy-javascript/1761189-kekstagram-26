@@ -36,7 +36,8 @@ const getValidation = () => {
 
   const getValidationOnHashtagField = (field) => {
     field.addEventListener('input', () => {
-
+      //берется строка, введенная пользователем  field.value, затем она переводится в нижний регистр toLowerCase().
+      //затем она разбивается на  подстроки, в соответствии с правилом \s+, это регулярное выражение - для поиска подстрок в строке
       const inputValues = field.value.toLowerCase().trim().split(/\s+/);
 
       if (inputValues.some((item) => item[0] !== '#')) {

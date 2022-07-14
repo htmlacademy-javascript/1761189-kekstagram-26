@@ -17,6 +17,7 @@ const smallerBtn = uploadScale.querySelector('.scale__control--smaller');
 const biggerBtn = uploadScale.querySelector('.scale__control--bigger');
 const scaleControl = uploadScale.querySelector('.scale__control--value');
 const imgUploadPreview = document.querySelector('.img-upload__preview');
+const sliderContainer = document.querySelector('.img-upload__effect-level');
 
 const uploadFile = () => {
 
@@ -44,6 +45,7 @@ const uploadFile = () => {
     uploadOverlay.classList.remove('hidden');
     document.body.classList.add('modal-open');
     document.addEventListener('keydown', escPressed);
+    sliderContainer.hidden = true;
   };
 
   const closeUploadOverlay = () => {
@@ -114,7 +116,7 @@ const uploadFile = () => {
     });
   };
 
-  setUserFormSubmit();
+  // setUserFormSubmit();
 };
 
 const rescale = () => {
@@ -126,9 +128,11 @@ const rescale = () => {
   };
   transformPhoto(scaleControlValue);
 
+  const step = 0.25;
+
   smallerBtn.addEventListener('click', () => {
-    if (scaleControlValue > 0.25) {
-      scaleControlValue -= 0.25;
+    if (scaleControlValue > step) {
+      scaleControlValue -= step;
     }
     scaleControl.value = scaleControlValue * 100 + '%';
     transformPhoto(scaleControlValue);
@@ -136,7 +140,7 @@ const rescale = () => {
 
   biggerBtn.addEventListener('click', () => {
     if (scaleControlValue < 1) {
-      scaleControlValue += 0.25;
+      scaleControlValue += step;
     }
     scaleControl.value = scaleControlValue * 100 + '%';
     transformPhoto(scaleControlValue);
